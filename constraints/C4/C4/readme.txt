@@ -1,0 +1,1 @@
+Alle hier abgelegten JSON Konfigurationen sollen genutzt werden in Ihrer Arbeit.
