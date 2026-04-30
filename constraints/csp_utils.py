@@ -39,16 +39,29 @@ def load_config(path: str | Path):
     path = Path(path)
     raw = path.read_text(encoding="utf-8")
     try:
-        return json.loads(raw), "json"
+        config, mode = json.loads(raw), "json"
     except Exception as json_error:
         try:
-            return ast.literal_eval(raw), "python_literal"
+            config, mode = ast.literal_eval(raw), "python_literal"
         except Exception as literal_error:
             raise ValueError(
                 "Die Datei konnte weder als JSON noch als Python-Literal gelesen werden.\n"
                 f"JSON-Fehler: {json_error}\n"
                 f"Literal-Fehler: {literal_error}"
             )
+
+    # Duplikate in 'groups' erkennen und entfernen
+    original = config.get("groups", [])
+    seen, deduped = set(), []
+    for g in original:
+        if g in seen:
+            print(f"Warnung [{path.name}]: Gruppe '{g}' doppelt eingetragen Duplikat entfernt.")
+        else:
+            seen.add(g)
+            deduped.append(g)
+    config["groups"] = deduped
+
+    return config, mode
 
 
 def normalize_availability_slot(slot):
