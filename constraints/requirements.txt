@@ -1,0 +1,20 @@
+# CSP-Projekt – Python-Abhängigkeiten
+# Installieren mit: pip install -r requirements.txt
+ 
+# Datenhaltung & Darstellung
+pandas>=2.0
+ipython>=8.0
+jinja2>=3.1
+ 
+# Visualisierung
+matplotlib>=3.7
+ 
+# CSP-Solver
+python-constraint>=1.4.0
+ 
+# OR-Tools (Google CP-SAT Solver)
+ortools>=9.8
+
+# Notebook-Umgebung
+jupyter>=1.0
+ipykernel>=6.0
